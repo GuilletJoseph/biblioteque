@@ -28,9 +28,11 @@ public class BibliotequeApplication {
 		
 		 System.out.print("Ajouter ID d'emprunt: ");    
 	       String idEmp = in.next();          
-	       emprunt =entityManager.find(Emprunt.class, 1);
-			System.out.println(emprunt.getId()+" "+ emprunt.getDateDebut()+ " "+emprunt.getDateFin());		 
+	       emprunt =entityManager.find(Emprunt.class, Integer.parseInt(idEmp));
+			System.out.println(emprunt.getId()+" "+ emprunt.getDateDebut()+ " "+emprunt.getDateFin());		
+			System.out.println(emprunt.getClient().getNom()+" "+emprunt.getClient().getPrenom());
 			System.out.println(emprunt.getLivres());
+		
 					
 			Client client =new Client();
 			
@@ -38,9 +40,9 @@ public class BibliotequeApplication {
 		       String idCli = in.next();
 		
 		
-		       client =entityManager.find(Client.class, 1);
+		       client =entityManager.find(Client.class,Integer.parseInt(idCli));
 				System.out.println(client.getNom()+" "+client.getPrenom());		 
-				//System.out.println(client.getEmprunts());	
+			System.out.println(client.getEmprunt().toString());	
 		
 	entityManager.close();
 	entityManagerFactory.close();

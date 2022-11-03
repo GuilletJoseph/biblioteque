@@ -1,4 +1,7 @@
 package entities;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -25,13 +28,14 @@ public class Client {
 	    
 	    private String nom;
 
-	    private String prenom ;
+	    private String prenom ;    
+		private Set<Emprunt> emprunt;
 
 		public Client() {
-				super();
-				// TODO Auto-generated constructor stub
-			}
+			emprunt = new HashSet<Emprunt>();
+		}
 
+		
 		@Id
 		@Column(name = "ID")
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +66,16 @@ public class Client {
 			this.prenom = prenom;
 		}
 
+		
+		@OneToMany(mappedBy = "client")
+		public Set<Emprunt> getEmprunt() {
+			return emprunt;
+		}
+
+		public void setEmprunt(Set<Emprunt> emprunt) {
+			this.emprunt = emprunt;
+		}
+	
 		@Override
 		public String toString() {
 			return "Client [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";

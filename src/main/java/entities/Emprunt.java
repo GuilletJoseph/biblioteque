@@ -35,13 +35,24 @@ public class Emprunt {
 	    private Date dateFin ;
 	@Column(name = "DELAI")
 	    private int delai;
-	@Column(name = "ID_CLIENT")
-    private int idclient;
-		
-		
-		
 		
 
+	//@OneToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "ID", referencedColumnName = "ID_CLIENT")
+	
+	
+	@ManyToOne
+    @JoinColumn(name = "ID_CLIENT")
+	private Client client;
+		
+
+		public Client getClient() {
+		return client;
+	}
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	
 		//RELATION AVEC LIVRE MANY TO MANY	
 		@ManyToMany
 		@JoinTable(name="compo", joinColumns= @JoinColumn(name="ID_EMP", referencedColumnName="ID"),
@@ -88,13 +99,9 @@ public class Emprunt {
 		public void setDelai(int delai) {
 			this.delai = delai;
 		}
-		
-		
-		public int getIdclient() {
-			return idclient;
-		}
-		public void setIdclient(int idclient) {
-			this.idclient = idclient;
+		@Override
+		public String toString() {
+			return "Emprunt [id=" + id + ", client=" + client + "]";
 		}
 	
 	
